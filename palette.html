@@ -1,0 +1,173 @@
+<HTML>
+<HEAD>
+<TITLE>Color Picker</TITLE>
+</HEAD>
+<Script Language="JavaScript">
+<!-- Hiding
+/*	Script by Lefteris Haritou	
+	http://www.geocities.com/~lef
+	This Script is free as long 
+	as you keep the above credit !
+*/
+
+var red=0;
+var green=0;
+var blue=0;
+var value=0;
+var convert = new Array()
+var hexbase= new Array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F");
+
+for (x=0; x<16; x++){
+for (y=0; y<16; y++){
+convert[value]= hexbase[x] + hexbase[y];
+value++;
+}
+}
+
+function clear(){
+document.color.bl.value= blue;
+document.color.rd.value= red;
+document.color.gr.value= green;
+}
+
+function display(){
+redx = convert[red]
+greenx = convert[green]
+bluex = convert[blue]
+var rgb = "#"+redx+greenx+bluex;
+document.color.rgbdspl.value= rgb;
+document.bgColor =rgb;
+}
+
+function setdspl(hexval){
+if (hexval.length!=7)
+alert("Invalid hexademical value entered");
+else{
+hexval=hexval.toUpperCase();
+document.color.rgbdspl.value=hexval
+redx=hexval.substring(1,3)
+greenx=hexval.substring(3,5)
+bluex=hexval.substring(5,7)
+hred=eval(parseInt(redx,16))
+hgreen=eval(parseInt(greenx,16))
+hblue=eval(parseInt(bluex,16))
+if (hred>=0 && hred<256 && hgreen>=0 && hgreen<256 && hblue>=0 && hblue<256){
+document.bgColor =hexval
+red=hred;
+green=hgreen;
+blue=hblue;
+document.color.rd.value= red;
+document.color.gr.value= green;
+document.color.bl.value= blue;
+}
+else{
+alert("Invalid Hexademical Value Entered")
+}
+}
+}
+
+function upred(x){
+if ((red+x)<=255)
+red+=x
+document.color.rd.value= red;
+display()
+}
+
+function downred(x){
+if ((red-x)>=0)
+red-=x
+document.color.rd.value= red;
+display()
+}
+
+function setred(x){
+if (x<0 || x>255)
+alert("Incorrect Value entered !\n\nValue must be from 0 to 255")
+else{
+red=eval(x);
+document.color.rd.value= red;
+display()
+}
+}
+
+function upgreen(x){
+if ((green+x)<=255)
+green+=x
+document.color.gr.value= green;
+display()
+}
+
+function setgreen(x){
+if (x<0 || x>255)
+alert("Incorrect Value entered !\n\nValue must be from 0 to 255")
+else{
+green=eval(x);
+document.color.gr.value= green;
+display()
+}
+}
+
+function downgreen(x){
+if ((green-x)>=0)
+green-=x
+document.color.gr.value= green;
+display()
+}
+
+function upblue(x){
+if ((blue+x)<=255)
+blue+=x
+document.color.bl.value= blue;
+display()
+}
+
+function setblue(x){
+if (x<0 || x>255)
+alert("Incorrect Value entered !\n\nValue must be from 0 to 255")
+else{
+blue=eval(x);
+document.color.bl.value= blue;
+display()
+}
+}
+
+function downblue(x){
+if ((blue-x)>=0)
+blue-=x
+document.color.bl.value= blue;
+display()
+}
+
+// done hiding -->
+</Script>
+<BODY onLoad="clear();display()" Bgcolor="#000000">
+<CENTER>
+<FORM Name="color">
+<TABLE>
+
+<TR Align="Center"><TD><INPUT NAME="red" type="button" VALUE=" +50 " onclick="upred(50)"></TD><TD><INPUT NAME="red" type="button" VALUE=" + + " onclick="upred(10)"></TD><TD><INPUT NAME="red" type="button" VALUE=" + " onclick="upred(1)">
+</TD><TD><Font Color="#FF0000" size=+3>RED</font></TD>
+<TD><INPUT NAME="red-" type="button" VALUE=" - " onclick="downred(1)"></TD><TD><INPUT NAME="red-" type="button" VALUE=" - - " onclick="downred(10)"></TD><TD><INPUT NAME="red-" type="button" VALUE=" -50 " onclick="downred(50)"></TD>
+<TD><Input type="text" Name="rd" Size=3  onchange="setred(this.form.rd.value)"></TD></TR>
+
+<TR Align="Center"><TD><INPUT NAME="green" type="button" VALUE=" +50 " onclick="upgreen(50)"></TD><TD><INPUT NAME="green" type="button" VALUE=" + + " onclick="upgreen(10)"></TD><TD><INPUT NAME="green" type="button" VALUE=" + " onclick="upgreen(1)"></TD>
+<TD><Font Color="#00FF00" size=+3>GREEN</font></TD>
+<TD><INPUT NAME="green-" type="button" VALUE=" - " onclick="downgreen(1)"></TD><TD><INPUT NAME="green-" type="button" VALUE=" - - " onclick="downgreen(10)"></TD><TD><INPUT NAME="green-" type="button" VALUE=" -50 " onclick="downgreen(50)"></TD>
+<TD><Input type="text" Name="gr" Size=3 onchange="setgreen(this.form.gr.value)"></TD></TR>
+
+<TR Align="Center"><TD><INPUT NAME="blue" type="button" VALUE=" +50 " onclick="upblue(50)"></TD><TD><INPUT NAME="blue" type="button" VALUE=" + + " onclick="upblue(10)"></TD><TD><INPUT NAME="blue" type="button" VALUE=" + " onclick="upblue(1)"></TD>
+<TD><Font Color="#0000FF" size=+3>BLUE</font></TD>
+<TD><INPUT NAME="blue-" type="button" VALUE=" - " onclick="downblue(1)"></TD><TD><INPUT NAME="blue-" type="button" VALUE=" - - " onclick="downblue(10)"></TD><TD><INPUT NAME="blue-" type="button" VALUE=" -50 " onclick="downblue(50)"></TD>
+<TD><Input type="text" Name="bl" Size=3 onchange="setblue(this.form.bl.value)"></TD></TR>
+<TR Align="Center"><TD></TD><TD></TD><TD></TD><TD><Input type="text" Name="rgbdspl" Size=7 onchange="setdspl(this.form.rgbdspl.value)"></TD><TD></TD><TD></TD><TD></TD><TD></TD></TR>
+</TABLE>
+</FORM>
+</CENTER>
+</BODY>
+</HTML>
+
+
+
+
+
+
